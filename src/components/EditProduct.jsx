@@ -29,7 +29,7 @@ export const EditProduct = ({ handleVisible, productItems, productId }) => {
 
   return (
     <main
-      className="absolute h-screen w-screen bg-white top-0 right-0 flex justify-center items-center"
+      className="absolute h-screen w-screen bg-[#E5D9F2] top-0 right-0 flex justify-center items-center"
       onClick={handleVisible}
     >
       <div
