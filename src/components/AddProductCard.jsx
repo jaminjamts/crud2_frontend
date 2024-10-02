@@ -1,7 +1,7 @@
+import { BACKEND_ENDPOINT } from "@/constants/constants";
 import { useState } from "react";
 
 export const AddProductCard = ({ isModal, modal }) => {
-  const BACKEND_ENDPOINT = "http://localhost:1111";
   const [category, setCategory] = useState("");
 
   const selectedValue = (event) => {
@@ -29,17 +29,17 @@ export const AddProductCard = ({ isModal, modal }) => {
 
   return (
     <div>
-      <button className="btn" onClick={modal}>
+      <button className="btn btn-neutral" onClick={modal}>
         Add product
       </button>
       {isModal ? (
         <div className="hidden"></div>
       ) : (
         <div
-          className="w-screen h-screen top-0 left-0 absolute"
+          className="w-screen h-screen flex justify-center items-center absolute top-0 left-0"
           onClick={modal}
         >
-          <div className="absolute right-32 top-28 bg-cyan-50 p-5 rounded-lg ">
+          <div className="absolute bg-cyan-50 p-5 rounded-lg ">
             <form
               onSubmit={handleAddProduct}
               className="flex flex-col gap-2 "
@@ -68,10 +68,10 @@ export const AddProductCard = ({ isModal, modal }) => {
               </select>
               <label>Price</label>
               <input
-                type="text"
+                type="number"
                 placeholder="Please enter a price"
                 name="price"
-                className="p-2 rounded-md bg-gray-200"
+                className="p-2 rounded-md bg-gray-200 content-none"
               />
               <button type="submit" className="btn">
                 Submit

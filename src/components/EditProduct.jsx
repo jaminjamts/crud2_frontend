@@ -1,5 +1,6 @@
 import { BACKEND_ENDPOINT } from "@/constants/constants";
 import { useState } from "react";
+
 export const EditProduct = ({ handleVisible, productItems, productId }) => {
   const [editCategoryValue, seteditCategoryValue] = useState("");
   const id = productId;

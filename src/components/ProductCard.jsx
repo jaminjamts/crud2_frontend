@@ -19,7 +19,7 @@ export const ProductCard = ({
   };
 
   return (
-    <main className="bg-gray-200 w-[250px]  h-[150px] flex flex-col justify-between p-5 rounded-lg">
+    <main className="bg-gray-200 w-[300px]  h-[150px] flex flex-col justify-between p-5 rounded-lg">
       <div className="flex  justify-between">
         <p>Product Name : </p>
         <div className="flex gap-4">
@@ -50,7 +50,7 @@ export const ProductCard = ({
         Category : <span>{category}</span>
       </p>
       <p>
-        Price : <span>{price}</span>
+        Price : <span>{price} $</span>
       </p>
     </main>
   );

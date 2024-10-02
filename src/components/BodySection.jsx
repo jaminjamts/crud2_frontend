@@ -2,7 +2,7 @@ import { ProductCard } from "./ProductCard";
 
 export const BodySection = ({ datas, deleteProduct, editProduct }) => {
   return (
-    <main className="w-full flex flex-wrap gap-4 justify-center py-10    ">
+    <main className="w-full flex flex-wrap gap-4 justify-between py-10    ">
       {datas.map((data) => (
         <div key={data.id}>
           {

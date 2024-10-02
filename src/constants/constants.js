@@ -1,1 +1,1 @@
-export const BACKEND_ENDPOINT = "http://localhost:1111";
+export const BACKEND_ENDPOINT = "https://crud2-backend.onrender.com";
