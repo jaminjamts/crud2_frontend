@@ -7,16 +7,20 @@ import { useEffect, useState } from "react";
 
 const Page = () => {
   const [isModal, setIsModal] = useState(true);
-  const [datas, setDatas] = useState(null);
+  const [datas, setDatas] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const modal = () => {
     setIsModal(!isModal);
   };
+
   const fetchData = async () => {
     try {
       const response = await fetch(BACKEND_ENDPOINT);
-      const data = await response?.json();
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      const data = await response.json();
       setDatas(data);
       setLoading(false);
     } catch (error) {
@@ -24,29 +28,43 @@ const Page = () => {
       setLoading(false);
     }
   };
+
   const editProduct = async (e) => {
     const editProductId = e.productId;
+    // Implement edit functionality here
   };
 
   const deleteProduct = async (e) => {
-    const product = e.productId;
+    const productId = e.productId;
+    const updatedData = datas.filter((data) => data.id !== productId);
+    setDatas(updatedData);
+
     const options = {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ id: product }),
+      body: JSON.stringify({ id: productId }),
     };
-    const response = await fetch(BACKEND_ENDPOINT, options);
-    const data = await response.json();
+
+    try {
+      const response = await fetch(BACKEND_ENDPOINT, options);
+      if (!response.ok) {
+        throw new Error("Failed to delete the product");
+      }
+      await response.json();
+    } catch (error) {
+      console.error("Error deleting product:", error);
+    }
   };
 
   useEffect(() => {
     fetchData();
-  }, [isModal, deleteProduct, editProduct]);
+    console.log("useeffect");
+  }, [isModal, editProduct]);
 
   return (
-    <main className="w-screen flex justify-center bg-[#E5D9F2] min-h-screen">
+    <main className="w-screen flex justify-center pt-3 bg-[#E5D9F2] min-h-screen">
       <div className="container max-w-screen-lg px-10 flex flex-col">
         <div className="flex justify-between ">
           <button
@@ -57,14 +75,14 @@ const Page = () => {
           </button>
           <dialog id="my_modal_1" className="modal">
             <div className="modal-box">
-              <div className="flex flex-col  justify-center items-center gap-4 ">
+              <div className="flex flex-col justify-center items-center gap-4 ">
                 <h3 className="font-bold text-lg">Phone number : 99119911</h3>
                 <h3 className="font-bold text-lg">E-Mail : lorem@gmail.com</h3>
                 <h3 className="font-bold text-lg">Social address : Ligthman</h3>
               </div>
               <div className="modal-action">
                 <form method="dialog">
-                  <button className="btn  bg-{#434a54}">Close</button>
+                  <button className="btn bg-[#434a54]">Close</button>
                 </form>
               </div>
             </div>
@@ -79,7 +97,7 @@ const Page = () => {
         <div className="">
           {loading ? (
             <div className="h-screen w-full flex pt-20 items-center flex-col gap-4">
-              <img src="/logo.png" alt="" srcset="" />
+              <img src="/logo.png" alt="logo" />
               Loading...
             </div>
           ) : (
